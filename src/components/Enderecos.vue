@@ -52,6 +52,7 @@
 
 <script>
 import Endereco from "./Endereco.vue";
+import EventBus from "../plugins/event-bus";
 
 export default {
   name: "Enderecos",
@@ -76,11 +77,22 @@ export default {
       this.addNewAddress = false;
     },
     removeAddress(index) {
-      this.localEnderecos.pop(index);
+      this.localEnderecos.splice(index, 1);
+    },
+    reset() {
+      this.localEnderecos = [];
+      this.addNewAddress = false;
+    },
+    sync() {
+      this.localEnderecos = this.enderecos;
     }
   },
   created() {
-    this.localEnderecos = this.enderecos;
+    this.sync();
+  },
+  mounted() {
+    EventBus.$on("load", this.sync);
+    EventBus.$on("reset", this.reset);
   },
   watch: {
     localEnderecos(newValue) {

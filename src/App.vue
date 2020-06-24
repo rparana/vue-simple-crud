@@ -1,10 +1,19 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/"><font-awesome-icon icon="user-alt" />Cadastro</router-link>
-      |
-      <router-link to="/about">About</router-link>
-    </div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <ul class="nav nav-pills">
+        <li class="nav-item">
+          <router-link class="nav-link" to="/"
+            ><font-awesome-icon icon="list-alt" style="margin-right: 10px;" />Listagem</router-link
+          >
+        </li>
+        <li class="nav-item">
+          <router-link class="nav-link" to="/cadastro"
+            ><font-awesome-icon icon="user-alt" style="margin-right: 10px;" />Cadastro</router-link
+          >
+        </li>
+      </ul>
+    </nav>
     <router-view />
   </div>
 </template>
@@ -36,5 +45,8 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+}
+.nav-item {
+  color: #fff;
 }
 </style>

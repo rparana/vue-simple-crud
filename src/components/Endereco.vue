@@ -26,7 +26,7 @@
             class="form-control"
             id="logradouro"
             type="text"
-            :disabled="!enableEdit"
+            required
             :class="{ 'is-invalid': $v.logradouro.$invalid && $v.logradouro.$dirty }"
             @input="$v.logradouro.$touch()"
           />
@@ -40,6 +40,8 @@
             class="form-control"
             id="numero"
             type="number"
+            ref="numero"
+            required
             :class="{ 'is-invalid': $v.numero.$invalid && $v.numero.$dirty }"
             @input="$v.numero.$touch()"
           />
@@ -68,7 +70,6 @@
             id="cidade"
             type="text"
             required
-            :disabled="!enableEdit"
             :class="{ 'is-invalid': $v.cidade.$invalid && $v.cidade.$dirty }"
             @input="$v.cidade.$touch()"
           />
@@ -83,7 +84,6 @@
             id="uf"
             type="text"
             required
-            :disabled="!enableEdit"
             :class="{ 'is-invalid': $v.uf.$invalid && $v.uf.$dirty }"
             @input="$v.uf.$touch()"
           />
@@ -94,7 +94,7 @@
       <a class="btn d-flex align-items-center mr-3" @click="close">
         Cancelar
       </a>
-      <button class="btn btn-primary d-flex align-items-center float-right">
+      <button class="btn btn-primary d-flex align-items-center float-right" :disabled="!isValid">
         Gravar
       </button>
     </div>
@@ -110,7 +110,6 @@ export default {
   name: "Endereco",
   data() {
     return {
-      enableEdit: true,
       logradouro: "",
       numero: "",
       complemento: "",
@@ -147,7 +146,6 @@ export default {
       this.cep = "";
     },
     getAddressByCep() {
-      console.log(this.cep);
       const cepLimpo = this.cep.replace(".", "").replace("-", "");
       axios({
         url: `http://viacep.com.br/ws/${cepLimpo}/json/`,
@@ -155,12 +153,12 @@ export default {
       }).then(response => {
         if (response.data.erro) {
           console.error("Cep não encontrado!");
-          this.enableEdit = true;
         } else {
           this.logradouro = response.data.logradouro;
           this.bairro = response.data.bairro;
           this.cidade = response.data.localidade;
           this.uf = response.data.uf;
+          this.$refs.numero.focus();
         }
       });
     }

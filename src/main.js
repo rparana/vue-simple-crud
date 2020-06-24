@@ -5,7 +5,9 @@ import {
   faPlus,
   faTrashAlt,
   faSearch,
-  faSave
+  faSave,
+  faListAlt,
+  faEdit
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import VueTheMask from "vue-the-mask";
@@ -15,7 +17,7 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 
-library.add(faUserAlt, faMapMarkerAlt, faPlus, faTrashAlt, faSearch, faSave);
+library.add(faUserAlt, faMapMarkerAlt, faPlus, faTrashAlt, faSearch, faSave, faListAlt, faEdit);
 Vue.use(VueTheMask);
 Vue.use(Vuelidate);
 Vue.component("font-awesome-icon", FontAwesomeIcon);
