@@ -148,7 +148,7 @@ export default {
     getAddressByCep() {
       const cepLimpo = this.cep.replace(".", "").replace("-", "");
       axios({
-        url: `http://viacep.com.br/ws/${cepLimpo}/json/`,
+        url: `https://viacep.com.br/ws/${cepLimpo}/json/`,
         method: "get"
       }).then(response => {
         if (response.data.erro) {
