@@ -4,6 +4,7 @@
       <thead>
         <tr>
           <th
+            class="sort"
             scope="col"
             v-for="(header, index) in headers"
             :key="index"
